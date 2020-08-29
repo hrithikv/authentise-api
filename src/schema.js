@@ -5,7 +5,7 @@ const schema = yup.object().shape({
     .string()
     .required('Please provide firstName')
     .max(50, 'firstName must be less than 50 characters'),
-  lastName: yup
+  lastName: yup       
     .string()
     .required('Please provide lastName')
     .max(50, 'firstName must be less than 50 characters'),
