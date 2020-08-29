@@ -5,7 +5,7 @@ import apicache from 'apicache';
 import rateLimit from 'express-rate-limit';
 
 import { errorLogger, validateToken } from './middleware';
-import musicians from './musicians';
+import courses from './courses';
 import schema from './schema';
 
 const app = express();
@@ -28,7 +28,7 @@ const router = express.Router();
 
 router.get('/', cache('30 minutes'), (req, res) => {
   req.apicacheGroup = 'all';
-  res.json(musicians);
+  res.json(courses);
 });
 
 router.get('/:id', cache('30 minutes'), (req, res, next) => {
@@ -36,11 +36,11 @@ router.get('/:id', cache('30 minutes'), (req, res, next) => {
     const ID = req.params.id;
     req.apicacheGroup = ID;
 
-    if (musicians[ID]) {
-      res.status(200).send(musicians[ID]);
+    if (courses[ID]) {
+      res.status(200).send(courses[ID]);
     } else {
       res.status(400).send({
-        errorMessage: 'Musician does not exist',
+        errorMessage: 'Course does not exist',
       });
     }
   } catch (e) {
@@ -52,18 +52,17 @@ router.put('/:id', validateToken, (req, res, next) => {
   try {
     const ID = req.params.id;
 
-    if (musicians[ID]) {
+    if (courses[ID]) {
       const update = schema.validateSync({
-        ...musicians[ID],
+        ...courses[ID],
         ...req.body,
       });
 
-      musicians[ID] = update;
+      courses[ID] = update;
     } else {
-      musicians[ID] = schema.validateSync(req.body);
+      courses[ID] = schema.validateSync(req.body);
     }
 
-    // Clear all cache
     apicache.clear(ID);
     apicache.clear('all');
 
@@ -77,6 +76,6 @@ router.put('/:id', validateToken, (req, res, next) => {
 
 router.use(errorLogger);
 
-app.use('/musicians', apiLimiter, router);
+app.use('/courses', apiLimiter, router);
 
 export default app;
