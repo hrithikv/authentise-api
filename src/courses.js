@@ -2,24 +2,24 @@ export default {
   datastructures: {
     firstName: 'Bari',
     lastName: 'Datastructures',
-    genre: 'COMPSCI',
+    detail: 'COMPSCI',
   },
 
   oop: {
     firstName: 'Frank',
     lastName: 'Oop',
-    genre: 'COMPSCI',
+    detail: 'COMPSCI',
   },
 
   theorycomputation: {
     firstName: 'Zahran',
     lastName: 'TheoryComputation',
-    genre: 'Cole',
+    detail: 'COLE',
   },
 
   physics: {
     firstName: 'Michael',
     lastName: 'Physics',
-    genre: 'SCIENCE',
+    detail: 'SCIENCE',
   },
 };
