@@ -22,7 +22,7 @@ const apiLimiter = rateLimit({
   max: 100,
 });
 
-const cache = apicache.middleware;
+const cache = apicache.middleware;        
 
 const router = express.Router();
 
