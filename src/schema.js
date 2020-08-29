@@ -12,7 +12,7 @@ const schema = yup.object().shape({
   genre: yup
     .string()
     .required('Please provide genre')
-    .oneOf(['JAZZ', 'ROCK', 'BLUES'], 'please provide valid genre'),
+    .oneOf(['COMPSCI', 'COLE', 'SCIENCE'], 'please provide valid genre'),
 });
 
 export default schema;
