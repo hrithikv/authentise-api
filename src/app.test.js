@@ -9,9 +9,9 @@ const michael = {
   detail: 'COLE',
 };
 
-const joel = {
-  firstName: 'Billy',
-  lastName: 'Joel',
+const vemparala = {
+  firstName: 'Hrithik',
+  lastName: 'Vemparala',
   detail: 'COLE',
 };
 
@@ -33,17 +33,17 @@ it('GET BY ID - Should respond 200 course by ID', done => {
 
 it('GET BY ID - Should respond 400 if course does not exist', done => {
   request
-    .get('/courses/joel')
+    .get('/courses/vemparala')
     .expect('Content-Type', /json/)
     .expect(400, done);
 });
 
 it('CREATE BY ID - Should respond 200 if course does not exist and create it', done => {
   request
-    .put('/courses/joel')
-    .send(joel)
+    .put('/courses/vemparala')
+    .send(vemparala)
     .expect('Content-Type', /json/)
-    .expect(200, { id: 'joel' }, done);
+    .expect(200, { id: 'vemparala' }, done);
 });
 
 it('CREATE BY ID - Should respond 400 if bad request data', done => {
@@ -83,11 +83,11 @@ it('PUT BY ID - Should respond 400 if bad update', done => {
     .expect(400, done);
 });
 
-it('GET BY ID - Should respond 200 for Joel', done => {
+it('GET BY ID - Should respond 200 for Vemparala', done => {
   request
-    .get('/courses/joel')
+    .get('/courses/vemparala')
     .expect('Content-Type', /json/)
-    .expect(200, joel, done);
+    .expect(200, vemparala, done);
 });
 
 it('GET BY ID - Should respond 200 with update for Michael', done => {
