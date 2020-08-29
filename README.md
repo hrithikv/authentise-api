@@ -2,14 +2,14 @@
 
 yarn install
 
-# Install dependencies
+# Run server
 
-yarn install
+yarn start
 
-# Install dependencies
+# Run tests
 
-yarn install
+yarn test
 
-# Install dependencies
+# Run tests interactively
 
-yarn install
+yarn test:watch
