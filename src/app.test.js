@@ -1,46 +1,46 @@
 import supertest from 'supertest';
-import musicians from './musicians';
+import courses from './courses';
 
 import app from './app';
 
-const muddy = {
-  firstName: 'Muddy',
-  lastName: 'Waters',
-  genre: 'ROCK',
+const michael = {
+  firstName: 'Michael',
+  lastName: 'Physics',
+  genre: 'Cole',
 };
 
 const joel = {
   firstName: 'Billy',
   lastName: 'Joel',
-  genre: 'ROCK',
+  genre: 'Cole',
 };
 
 const request = supertest(app);
 
-it('GET ALL - Should respond 200 with all musicians', done => {
+it('GET ALL - Should respond 200 with all courses', done => {
   request
-    .get('/musicians')
+    .get('/courses')
     .expect('Content-Type', /json/)
-    .expect(200, musicians, done);
+    .expect(200, courses, done);
 });
 
-it('GET BY ID - Should respond 200 musician by ID', done => {
+it('GET BY ID - Should respond 200 course by ID', done => {
   request
-    .get('/musicians/ella')
+    .get('/courses/datastructures')
     .expect('Content-Type', /json/)
-    .expect(200, musicians.ella, done);
+    .expect(200, courses.datastructures, done);
 });
 
-it('GET BY ID - Should respond 400 if musician does not exist', done => {
+it('GET BY ID - Should respond 400 if course does not exist', done => {
   request
-    .get('/musicians/joel')
+    .get('/courses/joel')
     .expect('Content-Type', /json/)
     .expect(400, done);
 });
 
-it('CREATE BY ID - Should respond 200 if musician does not exist and create it', done => {
+it('CREATE BY ID - Should respond 200 if course does not exist and create it', done => {
   request
-    .put('/musicians/joel')
+    .put('/courses/joel')
     .send(joel)
     .expect('Content-Type', /json/)
     .expect(200, { id: 'joel' }, done);
@@ -48,13 +48,13 @@ it('CREATE BY ID - Should respond 200 if musician does not exist and create it',
 
 it('CREATE BY ID - Should respond 400 if bad request data', done => {
   request
-    .put('/musicians/example')
+    .put('/courses/example')
     .send({
       firstName:
         'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
       lastName:
         'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
-      genre: 'ROCK',
+      genre: 'Cole',
     })
     .expect('Content-Type', /json/)
     .expect(
@@ -67,32 +67,32 @@ it('CREATE BY ID - Should respond 400 if bad request data', done => {
     );
 });
 
-it('PUT BY ID - Should respond 200 if musician does exist and update it', done => {
+it('PUT BY ID - Should respond 200 if course does exist and update it', done => {
   request
-    .put('/musicians/waters')
+    .put('/courses/physics')
     .send(muddy)
     .expect('Content-Type', /json/)
-    .expect(200, { id: 'waters' }, done);
+    .expect(200, { id: 'physics' }, done);
 });
 
 it('PUT BY ID - Should respond 400 if bad update', done => {
   request
-    .put('/musicians/waters')
-    .send({ genre: 'COUNTRY' })
+    .put('/courses/waters')
+    .send({ genre: 'CHEMISTRY' })
     .expect('Content-Type', /json/)
     .expect(400, done);
 });
 
 it('GET BY ID - Should respond 200 for Joel', done => {
   request
-    .get('/musicians/joel')
+    .get('/courses/joel')
     .expect('Content-Type', /json/)
     .expect(200, joel, done);
 });
 
-it('GET BY ID - Should respond 200 with update for Muddy', done => {
+it('GET BY ID - Should respond 200 with update for Michael', done => {
   request
-    .get('/musicians/waters')
+    .get('/courses/physics')
     .expect('Content-Type', /json/)
-    .expect(200, muddy, done);
+    .expect(200, michael, done);
 });
